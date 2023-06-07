@@ -12,6 +12,9 @@
         android:theme="@style/Theme.H071211050FinalMobile"
         tools:targetApi="31">
         <activity
+            android:name=".DetailMovieActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
