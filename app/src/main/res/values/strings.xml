@@ -2,4 +2,6 @@
     <string name="app_name">H071211050 - Final Mobile</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie">Movie</string>
+    <string name="tv">Tv Show</string>
 </resources>
