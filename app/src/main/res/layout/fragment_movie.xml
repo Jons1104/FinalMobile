@@ -7,11 +7,11 @@
     tools:context=".MovieFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listMovie"
+        android:id="@+id/listmovie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/grid_item"
-        />
+        tools:listitem="@layout/grid_item" />
+
     <TextView
         android:id="@+id/error"
         android:layout_width="wrap_content"
@@ -21,8 +21,9 @@
         android:visibility="gone"
         android:textAlignment="center"
         android:text="There's something trouble \n try to reload your page"/>
+
     <ProgressBar
-        android:id="@+id/progressbarMovie"
+        android:id="@+id/progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"/>
