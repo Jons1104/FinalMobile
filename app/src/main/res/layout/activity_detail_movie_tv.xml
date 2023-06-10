@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".DetailMovieTvActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/backdrop_image_iv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/back_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="15dp"
+            android:background="@color/white"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:scaleType="center"
+                android:src="@drawable/arrow_back"
+                app:tint="@color/black" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/favorite_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:background="@color/white"
+            app:cardCornerRadius="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/favorite_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/favorite_border"
+                app:tint="@color/black" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/poster_image_container"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="@id/backdrop_image_iv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backdrop_image_iv">
+
+            <ImageView
+                android:id="@+id/poster_image_iv"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/profil" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="John Wick"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backdrop_image_iv" />
+
+        <TextView
+            android:id="@+id/release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="80dp"
+            android:textSize="15sp"
+            android:text="21-01-2021"
+            app:layout_constraintStart_toEndOf="@+id/poster_image_container"
+            app:layout_constraintTop_toBottomOf="@+id/title_tv"
+            />
+
+        <ImageView
+            android:id="@+id/type_icon_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/movie"
+            app:layout_constraintBottom_toBottomOf="@id/poster_image_container"
+            app:layout_constraintStart_toEndOf="@id/poster_image_container"/>
+
+        <TextView
+            android:id="@+id/overview_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/poster_image_container"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="30dp"
+            android:text="Overview"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/poster_image_container"/>
+
+        <TextView
+            android:id="@+id/overview_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/overview_title_tv"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="8dp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at leo in tortor ullamcorper blandit. Maecenas eu aliquet dolor. Sed gravida aliquet lacus, a maximus elit tempus nec."
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/overview_title_tv"/>
+
+        <LinearLayout
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/overview_tv"
+            app:layout_constraintStart_toEndOf="@+id/overview_tv">
+
+            <ImageView
+                android:id="@+id/rating_iv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/star"
+                />
+
+            <TextView
+                android:id="@+id/rating_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="12sp"
+                android:text="7.2"
+                />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
