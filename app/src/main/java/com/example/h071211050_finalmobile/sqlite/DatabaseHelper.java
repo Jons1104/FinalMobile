@@ -25,8 +25,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Database.ItemColumns.TITLE,
                     Database.ItemColumns.DATE,
                     Database.ItemColumns.OVERVIEW,
-                    Database.ItemColumns.POSTER,
-                    Database.ItemColumns.BACKDROP,
+                    Database.ItemColumns.POSTER_PATH,
+                    Database.ItemColumns.BACKDROP_PATH,
                     Database.ItemColumns.VOTE_AVERAGE,
                     Database.ItemColumns.TYPE
 
