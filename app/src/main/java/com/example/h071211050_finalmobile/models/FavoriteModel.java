@@ -1,19 +1,50 @@
 package com.example.h071211050_finalmobile.models;
 
-public class FavoriteModel {
-    private int id, type;
-    private String date, title, overview, poster, backdrop, vote_average;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    public FavoriteModel(int id, String title, String date, String overview, String poster, String backdrop, String vote_average, int type) {
-        this.id = id;
-        this.type = type;
-        this.date = date;
-        this.title = title;
-        this.overview = overview;
-        this.poster = poster;
-        this.backdrop = backdrop;
-        this.vote_average = vote_average;
+import androidx.annotation.NonNull;
+
+public class FavoriteModel implements Parcelable {
+    private int id, type;
+    private String title, date, overview, poster_path, backdrop_path, vote_average;
+
+    public FavoriteModel() {
     }
+
+    public FavoriteModel(int id, String title, String date, String overview, String poster_path, String backdrop_path, String vote_average, int type) {
+        this.id = id;
+        this.title = title;
+        this.date = date;
+        this.overview = overview;
+        this.poster_path = poster_path;
+        this.backdrop_path = backdrop_path;
+        this.vote_average = vote_average;
+        this.type = type;
+    }
+
+    protected FavoriteModel(Parcel in) {
+        id = in.readInt();
+        type = in.readInt();
+        title = in.readString();
+        date = in.readString();
+        overview = in.readString();
+        poster_path = in.readString();
+        backdrop_path = in.readString();
+        vote_average = in.readString();
+    }
+
+    public static final Creator<FavoriteModel> CREATOR = new Creator<FavoriteModel>() {
+        @Override
+        public FavoriteModel createFromParcel(Parcel in) {
+            return new FavoriteModel(in);
+        }
+
+        @Override
+        public FavoriteModel[] newArray(int size) {
+            return new FavoriteModel[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -55,20 +86,20 @@ public class FavoriteModel {
         this.overview = overview;
     }
 
-    public String getPoster() {
-        return poster;
+    public String getPoster_path() {
+        return poster_path;
     }
 
-    public void setPoster(String poster) {
-        this.poster = poster;
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
     }
 
-    public String getBackdrop() {
-        return backdrop;
+    public String getBackdrop_path() {
+        return backdrop_path;
     }
 
-    public void setBackdrop(String backdrop) {
-        this.backdrop = backdrop;
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
     }
 
     public String getVote_average() {
@@ -77,5 +108,22 @@ public class FavoriteModel {
 
     public void setVote_average(String vote_average) {
         this.vote_average = vote_average;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel del, int flags) {
+        del.writeInt(id);
+        del.writeInt(type);
+        del.writeString(title);
+        del.writeString(date);
+        del.writeString(overview);
+        del.writeString(poster_path);
+        del.writeString(backdrop_path);
+        del.writeString(vote_average);
     }
 }

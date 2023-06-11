@@ -1,4 +1,4 @@
-package com.example.h071211050_finalmobile;
+package com.example.h071211050_finalmobile.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
-public class MovieResponse implements Parcelable {
+public class MovieModel implements Parcelable {
     @SerializedName("id")
     private int id;
     @SerializedName("title")
@@ -23,7 +23,7 @@ public class MovieResponse implements Parcelable {
     @SerializedName("vote_average")
     private String vote_average;
 
-    protected MovieResponse(Parcel in) {
+    protected MovieModel(Parcel in) {
         id = in.readInt();
         title = in.readString();
         release_date = in.readString();
@@ -33,15 +33,15 @@ public class MovieResponse implements Parcelable {
         vote_average = in.readString();
     }
 
-    public static final Creator<MovieResponse> CREATOR = new Creator<MovieResponse>() {
+    public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
         @Override
-        public MovieResponse createFromParcel(Parcel in) {
-            return new MovieResponse(in);
+        public MovieModel createFromParcel(Parcel in) {
+            return new MovieModel(in);
         }
 
         @Override
-        public MovieResponse[] newArray(int size) {
-            return new MovieResponse[size];
+        public MovieModel[] newArray(int size) {
+            return new MovieModel[size];
         }
     };
 
@@ -73,13 +73,13 @@ public class MovieResponse implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(title);
-        dest.writeString(release_date);
-        dest.writeString(overview);
-        dest.writeString(poster_path);
-        dest.writeString(backdrop_path);
-        dest.writeString(vote_average);
+    public void writeToParcel(@NonNull Parcel del, int flags) {
+        del.writeInt(id);
+        del.writeString(title);
+        del.writeString(release_date);
+        del.writeString(overview);
+        del.writeString(poster_path);
+        del.writeString(backdrop_path);
+        del.writeString(vote_average);
     }
 }
