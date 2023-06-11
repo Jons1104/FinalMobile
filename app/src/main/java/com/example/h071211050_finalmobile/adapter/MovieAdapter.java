@@ -14,15 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.h071211050_finalmobile.DetailMovieTvActivity;
 import com.example.h071211050_finalmobile.R;
-import com.example.h071211050_finalmobile.MovieResponse;
+import com.example.h071211050_finalmobile.models.FavoriteModel;
+import com.example.h071211050_finalmobile.models.MovieModel;
 
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
-    private final String imgBaseUrl = "https://image.tmdb.org/t/p/w500";
-    private List<MovieResponse> dataMovie;
+    private List<MovieModel> dataMovie;
 
-    public MovieAdapter(List<MovieResponse> dataMovie) {
+    public MovieAdapter(List<MovieModel> dataMovie) {
         this.dataMovie = dataMovie;
     }
 
@@ -36,18 +36,32 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MovieResponse movieResponse = dataMovie.get(position);
-        holder.title.setText(movieResponse.getTitle());
-        holder.release_date.setText(movieResponse.getReleaseDate().substring(0, 4));
-        Glide.with(holder.itemView.getContext())
-                .load(imgBaseUrl + movieResponse.getPosterPath())
-                .centerCrop()
-                .placeholder(R.drawable.noimage)
-                .into(holder.poster);
-        holder.item_grid.setOnClickListener(v -> {
+        MovieModel movieModel = dataMovie.get(position);
+
+        if (movieModel.getTitle().equals("") || movieModel.getTitle() == null)
+            holder.title_movie.setText("-");
+        else
+            holder.title_movie.setText(movieModel.getTitle());
+
+        if (!movieModel.getReleaseDate().equals("") || movieModel.getReleaseDate() != null)
+            holder.release_year.setText(movieModel.getReleaseDate().substring(0, 4));
+        else
+            holder.release_year.setText("-");
+
+        Glide.with(holder.itemView.getContext()).load("https://image.tmdb.org/t/p/w500" + movieModel.getPosterPath()).centerCrop().into(holder.Poster);
+        holder.item_grid_cv.setOnClickListener(v -> {
+            FavoriteModel favouriteModel = new FavoriteModel(
+                    movieModel.getId(),
+                    movieModel.getTitle(),
+                    movieModel.getReleaseDate(),
+                    movieModel.getOverview(),
+                    movieModel.getPosterPath(),
+                    movieModel.getBackdropPath(),
+                    movieModel.getVoteAverage(),
+                    DetailMovieTvActivity.TYPE_MOVIE );
+
             Intent i = new Intent(holder.itemView.getContext(), DetailMovieTvActivity.class);
-            i.putExtra(DetailMovieTvActivity.EXTRA_ITEM, movieResponse);
-            i.putExtra(DetailMovieTvActivity.EXTRA_TYPE, DetailMovieTvActivity.TYPE_MOVIE);
+            i.putExtra(DetailMovieTvActivity.EXTRA_ITEM, favouriteModel);
             holder.itemView.getContext().startActivity(i);
         });
     }
@@ -58,16 +72,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView poster;
-        TextView title, release_date;
-        CardView item_grid;
+        ImageView Poster;
+        TextView title_movie, release_year;
+        CardView item_grid_cv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            poster = itemView.findViewById(R.id.poster);
-            title = itemView.findViewById(R.id.title_tv);
-            release_date= itemView.findViewById(R.id.release_year_tv);
-            item_grid = itemView.findViewById(R.id.item_grid);
+            Poster = itemView.findViewById(R.id.poster);
+            title_movie = itemView.findViewById(R.id.title2);
+            release_year = itemView.findViewById(R.id.release_year2);
+            item_grid_cv = itemView.findViewById(R.id.item_grid_cv);
         }
 
     }

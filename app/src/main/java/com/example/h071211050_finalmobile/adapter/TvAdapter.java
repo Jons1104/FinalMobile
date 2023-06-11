@@ -14,15 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.h071211050_finalmobile.DetailMovieTvActivity;
 import com.example.h071211050_finalmobile.R;
-import com.example.h071211050_finalmobile.TvResponse;
+import com.example.h071211050_finalmobile.models.FavoriteModel;
+import com.example.h071211050_finalmobile.models.TvModel;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
-    private String imgBaseUrl = "https://image.tmdb.org/t/p/w500";
-    private List<TvResponse> dataTv;
+    private List<TvModel> dataTv;
 
-    public TvAdapter(List<TvResponse> dataTv) {
+    public TvAdapter(List<TvModel> dataTv) {
         this.dataTv = dataTv;
     }
 
@@ -36,37 +37,52 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TvAdapter.ViewHolder holder, int position) {
-        TvResponse tvResponse = dataTv.get(position);
-        holder.title.setText(tvResponse.getName());
-        holder.release_date.setText(tvResponse.getFirstAirDate().substring(0, 4));
-        Glide.with(holder.itemView.getContext())
-                .load(imgBaseUrl + tvResponse.getPosterPath())
-                .centerCrop()
-                .placeholder(R.drawable.noimage)
-                .into(holder.poster);
-        holder.item_grid.setOnClickListener(v -> {
+        TvModel tvModel = dataTv.get(position);
+
+        if (tvModel.getName().equals("") || tvModel.getName() == null)
+            holder.title_movie.setText("-");
+        else
+            holder.title_movie.setText(tvModel.getName());
+
+        if (Objects.equals(tvModel.getFirstAirDate(), "") || tvModel.getFirstAirDate() == null)
+            holder.release_date.setText("-");
+        else
+            holder.release_date.setText(tvModel.getFirstAirDate().substring(0, 4));
+
+        Glide.with(holder.itemView.getContext()).load("https://image.tmdb.org/t/p/w500" + tvModel.getPosterPath()).centerCrop().into(holder.movie_poster);
+        holder.item_grid_cv.setOnClickListener(v -> {
+            FavoriteModel favoriteModel = new FavoriteModel(
+                    tvModel.getId(),
+                    tvModel.getName(),
+                    tvModel.getFirstAirDate(),
+                    tvModel.getOverview(),
+                    tvModel.getPosterPath(),
+                    tvModel.getBackdropPath(),
+                    tvModel.getVoteAverage(),
+                    DetailMovieTvActivity.TYPE_TV );
+
             Intent i = new Intent(holder.itemView.getContext(), DetailMovieTvActivity.class);
-            i.putExtra(DetailMovieTvActivity.EXTRA_ITEM, tvResponse);
-            i.putExtra(DetailMovieTvActivity.EXTRA_TYPE,DetailMovieTvActivity.TYPE_TV);
+            i.putExtra(DetailMovieTvActivity.EXTRA_ITEM, favoriteModel);
             holder.itemView.getContext().startActivity(i);
         });
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView movie_poster;
+        TextView title_movie, release_date;
+        CardView item_grid_cv;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            movie_poster = itemView.findViewById(R.id.poster);
+            title_movie = itemView.findViewById(R.id.title2);
+            release_date = itemView.findViewById(R.id.release_year2);
+            item_grid_cv = itemView.findViewById(R.id.item_grid_cv);
+        }
     }
 
     @Override
     public int getItemCount() {
         return dataTv.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView poster;
-        TextView title, release_date;
-        CardView item_grid;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            poster = itemView.findViewById(R.id.poster);
-            title = itemView.findViewById(R.id.title_tv);
-            release_date = itemView.findViewById(R.id.release_year_tv);
-            item_grid = itemView.findViewById(R.id.item_grid);
-        }
     }
 }
