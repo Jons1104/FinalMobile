@@ -1,4 +1,4 @@
-package com.example.h071211050_finalmobile.sqlite;
+package com.example.h071211050_finalmobile.networking;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,14 +7,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.core.content.ContextCompat;
-
-import com.example.h071211050_finalmobile.models.FavoriteModel;
-
 public class FavoriteHelper {
     private static final String TABLE_NAME = Database.TABLE_NAME;
-    private static SQLiteDatabase database;
     private final DatabaseHelper databaseHelper;
+    private static SQLiteDatabase database;
     private static volatile FavoriteHelper INSTANCE;
 
     public FavoriteHelper(Context context) {
@@ -28,8 +24,7 @@ public class FavoriteHelper {
                     INSTANCE = new FavoriteHelper(context);
                 }
             }
-        }
-        return INSTANCE;
+        }return INSTANCE;
     }
 
     public void open() throws SQLException {
@@ -51,16 +46,16 @@ public class FavoriteHelper {
                 null,
                 null,
                 null,
-                Database.ItemColumns._ID + "ASC"
+                Database.ItemColumns._ID + " ASC"
         );
+    }
+
+    public int getFavorite(String id) {
+        return database.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + Database.ItemColumns._ID + " = " + id, null).getCount();
     }
 
     public long insertData(ContentValues contentValues) {
         return database.insert(TABLE_NAME, null, contentValues);
-    }
-
-    public int updateData(String id, ContentValues contentValues) {
-        return database.update(TABLE_NAME, contentValues, Database.ItemColumns._ID + " = ?", new String[]{id});
     }
 
     public int deleteData(String id) {
