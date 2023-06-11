@@ -1,4 +1,4 @@
-package com.example.h071211050_finalmobile;
+package com.example.h071211050_finalmobile.data;
 
 import com.example.h071211050_finalmobile.models.MovieModel;
 import com.google.gson.annotations.SerializedName;

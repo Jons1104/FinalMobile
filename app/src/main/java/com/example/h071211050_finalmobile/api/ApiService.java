@@ -1,7 +1,7 @@
 package com.example.h071211050_finalmobile.api;
 
-import com.example.h071211050_finalmobile.MovieData;
-import com.example.h071211050_finalmobile.TvData;
+import com.example.h071211050_finalmobile.data.MovieData;
+import com.example.h071211050_finalmobile.data.TvData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

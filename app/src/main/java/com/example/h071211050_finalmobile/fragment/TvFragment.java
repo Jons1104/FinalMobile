@@ -1,4 +1,6 @@
-package com.example.h071211050_finalmobile;
+package com.example.h071211050_finalmobile.fragment;
+
+import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
 
@@ -15,11 +17,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.h071211050_finalmobile.MainActivity;
 import com.example.h071211050_finalmobile.R;
+import com.example.h071211050_finalmobile.data.TvData;
 import com.example.h071211050_finalmobile.adapter.TvAdapter;
-import com.example.h071211050_finalmobile.Api.ApiConfig;
-import com.example.h071211050_finalmobile.Api.TvData;
-import com.example.h071211050_finalmobile.TvResponse;
+import com.example.h071211050_finalmobile.api.ApiConfig;
+import com.example.h071211050_finalmobile.models.TvModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +33,11 @@ import retrofit2.Response;
 
 public class TvFragment extends Fragment {
 
-    private RecyclerView listTv;
-    private ProgressBar progressbar;
-    private TextView error;
-    public static List<TvResponse> datatv = new ArrayList<>();
+    private RecyclerView ListTv;
+    private ProgressBar TvProgressbar;
+    private TextView Error;
+    private TvAdapter TVadapter;
+    public static List<TvModel> dataTv = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,42 +51,48 @@ public class TvFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        progressbar = view.findViewById(R.id.progressbar);
-        error = view.findViewById(R.id.error);
-        listTv = view.findViewById(R.id.listtv);
+        ListTv = view.findViewById(R.id.listTv);
+        TvProgressbar = view.findViewById(R.id.tv_progressbar);
+        Error = view.findViewById(R.id.error);
 
-        listTv.setHasFixedSize(true);
-        listTv.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        if (MainActivity.actionBar != null) {
+            Log.d(TAG, "join require Action bar");
+            MainActivity.actionBar.setTitle("Tv Show");
+        }
+
+        ListTv.setHasFixedSize(true);
+        ListTv.setLayoutManager(new GridLayoutManager(getContext(), 2));
         setDataTv();
 
     }
 
     private void setDataTv() {
-        Call<TvData> tvClient = ApiConfig.getApiService().getTvSeries();
+        Call<TvData> tvClient = ApiConfig.getApiService().getTv();
         tvClient.enqueue(new Callback<TvData>() {
             @Override
             public void onResponse(Call<TvData> call, Response<TvData> response) {
                 if(response.isSuccessful()){
                     if (response.body().getData() != null) {
-                        progressbar.setVisibility(View.GONE);
-                        datatv = response.body().getData();
+                        TvProgressbar.setVisibility(View.GONE);
+                        dataTv = response.body().getData();
                         Log.d("MainActivity", "tv list");
-                        for (TvResponse tvDataResponse : datatv) {
-                            Log.d("MainActivity", "" + tvDataResponse.getName());
+                        for (TvModel tvDataResponse : dataTv) {
+                            Log.d("MainActivity", ": " + tvDataResponse.getName());
                         }
-                        TvAdapter tvAdapter = new TvAdapter(datatv);
-                        listTv.setAdapter(tvAdapter);
+                        TVadapter = new TvAdapter(dataTv);
+                        ListTv.setAdapter(TVadapter);
                     } else {
                         Log.e("MainActivity", "data body is null");
-                        progressbar.setVisibility(View.GONE);
-                        error.setVisibility(View.VISIBLE);
+                        TvProgressbar.setVisibility(View.GONE);
+                        Error.setVisibility(View.VISIBLE);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<TvData> call, Throwable t) {
-                Log.d("MainActivity", "" + t.getMessage());
+                Log.d("MainActivity", "onFailure: " + t.getMessage());
+                Error.setVisibility(View.VISIBLE);
             }
         });
     }

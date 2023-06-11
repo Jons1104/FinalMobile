@@ -1,4 +1,4 @@
-package com.example.h071211050_finalmobile;
+package com.example.h071211050_finalmobile.fragment;
 
 import static android.content.ContentValues.TAG;
 
@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.h071211050_finalmobile.MainActivity;
+import com.example.h071211050_finalmobile.R;
 import com.example.h071211050_finalmobile.adapter.FavoriteAdapter;
 import com.example.h071211050_finalmobile.models.FavoriteModel;
 import com.example.h071211050_finalmobile.networking.DataAsynchronous;
