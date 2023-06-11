@@ -23,6 +23,19 @@ import java.util.Objects;
 public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
     private List<TvModel> dataTv;
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView movie_poster;
+        TextView title_movie, release_date;
+        CardView item_grid_cv;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            movie_poster = itemView.findViewById(R.id.poster);
+            title_movie = itemView.findViewById(R.id.title2);
+            release_date = itemView.findViewById(R.id.release_year2);
+            item_grid_cv = itemView.findViewById(R.id.item_grid_cv);
+        }
+    }
+
     public TvAdapter(List<TvModel> dataTv) {
         this.dataTv = dataTv;
     }
@@ -65,20 +78,6 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
             i.putExtra(DetailMovieTvActivity.EXTRA_ITEM, favoriteModel);
             holder.itemView.getContext().startActivity(i);
         });
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        ImageView movie_poster;
-        TextView title_movie, release_date;
-        CardView item_grid_cv;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            movie_poster = itemView.findViewById(R.id.poster);
-            title_movie = itemView.findViewById(R.id.title2);
-            release_date = itemView.findViewById(R.id.release_year2);
-            item_grid_cv = itemView.findViewById(R.id.item_grid_cv);
-        }
     }
 
     @Override

@@ -50,7 +50,9 @@ public class FavoriteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setView(view);
+        ListFavorite = view.findViewById(R.id.listFavorite);
+        Error = view.findViewById(R.id.error);
+        FavoriteProgressbar = view.findViewById(R.id.fav_progressbar);
 
         if (MainActivity.actionBar != null) {
             Log.d(TAG, "join require Action bar");
@@ -77,11 +79,5 @@ public class FavoriteFragment extends Fragment {
                 FavoriteProgressbar.setVisibility(View.GONE);
             }
         }).execute();
-    }
-
-    private void setView(View view) {
-        ListFavorite = view.findViewById(R.id.listFavorite);
-        Error = view.findViewById(R.id.error);
-        FavoriteProgressbar = view.findViewById(R.id.fav_progressbar);
     }
 }

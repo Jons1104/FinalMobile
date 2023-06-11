@@ -12,7 +12,14 @@ public class FavoriteModel implements Parcelable {
     public FavoriteModel() {
     }
 
-    public FavoriteModel(int id, String title, String date, String overview, String poster_path, String backdrop_path, String vote_average, int type) {
+    public FavoriteModel(int id,
+                         String title,
+                         String date,
+                         String overview,
+                         String poster_path,
+                         String backdrop_path,
+                         String vote_average,
+                         int type) {
         this.id = id;
         this.title = title;
         this.date = date;

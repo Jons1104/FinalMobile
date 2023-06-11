@@ -31,7 +31,17 @@ public class DetailMovieTvActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_movie_tv);
-        setView();
+
+        backdrop_img = findViewById(R.id.backdrop_img);
+        poster_img = findViewById(R.id.poster_img);
+        back_button = findViewById(R.id.back_button);
+        favorite_button = findViewById(R.id.favorite_button);
+        title3 = findViewById(R.id.title3);
+        release_date = findViewById(R.id.release_date);
+        rating = findViewById(R.id.rating_tv);
+        synopsis = findViewById(R.id.synopsis);
+        type_icon = findViewById(R.id.type_icon );
+        favorite_icon = findViewById(R.id.favorite_icon);
 
         favoriteHelper = FavoriteHelper.getInstance(getApplicationContext());
         favoriteHelper.open();
@@ -69,26 +79,29 @@ public class DetailMovieTvActivity extends AppCompatActivity {
     }
 
     private void insertDataToFavouriteTable(FavoriteModel favouriteModel) {
-        ContentValues values = new ContentValues();
-        values.put(Database.ItemColumns._ID, favouriteModel.getId());
-        values.put(Database.ItemColumns.TITLE, favouriteModel.getTitle());
-        values.put(Database.ItemColumns.DATE, favouriteModel.getDate());
-        values.put(Database.ItemColumns.VOTE_AVERAGE, favouriteModel.getVote_average());
-        values.put(Database.ItemColumns.OVERVIEW, favouriteModel.getOverview());
-        values.put(Database.ItemColumns.POSTER_PATH, favouriteModel.getPoster_path());
-        values.put(Database.ItemColumns.BACKDROP_PATH, favouriteModel.getBackdrop_path());
-        values.put(Database.ItemColumns.TYPE, favouriteModel.getType());
-
-        long result = favoriteHelper.insertData(values);
+        ContentValues cv  = new ContentValues();
+        cv.put(Database.ItemColumns._ID, favouriteModel.getId());
+        cv.put(Database.ItemColumns.TITLE, favouriteModel.getTitle());
+        cv.put(Database.ItemColumns.DATE, favouriteModel.getDate());
+        cv.put(Database.ItemColumns.VOTE_AVERAGE, favouriteModel.getVote_average());
+        cv.put(Database.ItemColumns.OVERVIEW, favouriteModel.getOverview());
+        cv.put(Database.ItemColumns.POSTER_PATH, favouriteModel.getPoster_path());
+        cv.put(Database.ItemColumns.BACKDROP_PATH, favouriteModel.getBackdrop_path());
+        cv.put(Database.ItemColumns.TYPE, favouriteModel.getType());
+        long result = favoriteHelper.insertData(cv);
 
         String message = result > 0 ? "Berhasil menambahkan " + favoriteModel.getTitle() : "Gagal menambahkan " + favoriteModel.getTitle();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void displayData(FavoriteModel favoriteModel) {
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500" + favoriteModel.getBackdrop_path()).centerCrop()
+        Glide.with(this)
+                .load("https://image.tmdb.org/t/p/w500" + favoriteModel.getBackdrop_path())
+                .centerCrop()
                 .into(backdrop_img);
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500" + favoriteModel.getPoster_path()).centerCrop()
+        Glide.with(this)
+                .load("https://image.tmdb.org/t/p/w500" + favoriteModel.getPoster_path())
+                .centerCrop()
                 .into(poster_img);
         title3.setText(favoriteModel.getTitle());
         release_date.setText(favoriteModel.getDate());
@@ -120,20 +133,6 @@ public class DetailMovieTvActivity extends AppCompatActivity {
         } else {
             type_icon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.tv, null));
         }
-
-    }
-
-    private void setView() {
-        backdrop_img = findViewById(R.id.backdrop_img);
-        poster_img = findViewById(R.id.poster_img);
-        back_button = findViewById(R.id.back_button);
-        favorite_button = findViewById(R.id.favorite_button);
-        title3 = findViewById(R.id.title3);
-        release_date = findViewById(R.id.release_date);
-        rating = findViewById(R.id.rating_tv);
-        synopsis = findViewById(R.id.synopsis);
-        type_icon = findViewById(R.id.type_icon );
-        favorite_icon = findViewById(R.id.favorite_icon);
     }
 
     @Override

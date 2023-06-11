@@ -28,6 +28,20 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         this.result = result;
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView Profil, icon_type;
+        TextView title, release_year;
+        CardView item;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            Profil = itemView.findViewById(R.id.profil);
+            icon_type = itemView.findViewById(R.id.icon_type);
+            title = itemView.findViewById(R.id.title);
+            release_year = itemView.findViewById(R.id.release_year);
+            item = itemView.findViewById(R.id.item_cv);
+        }
+    }
+
     @NonNull
     @Override
     public FavoriteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -71,20 +85,5 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     @Override
     public int getItemCount() {
         return favoriteModels.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView Profil, icon_type;
-        TextView title, release_year;
-        CardView item;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            Profil = itemView.findViewById(R.id.profil);
-            icon_type = itemView.findViewById(R.id.icon_type);
-            title = itemView.findViewById(R.id.title);
-            release_year = itemView.findViewById(R.id.release_year);
-            item = itemView.findViewById(R.id.item_cv);
-        }
-
     }
 }

@@ -8,8 +8,22 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    public DatabaseHelper(@Nullable Context context) {
+        super(context, Database.DATABASE_NAME, null, Database.DATABASE_VERSION);
+    }
 
-    private static final String CREATE_TABLE_FAVOURITE_QUERY =
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(CREATE_TABLE_FAVOURITE_QUERY);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + Database.TABLE_NAME);
+        onCreate(db);
+    }
+
+    private String CREATE_TABLE_FAVOURITE_QUERY =
             String.format(
                     "CREATE TABLE %S"
                             + "(%s INTEGER NOT NULL PRIMARY KEY,"
@@ -31,20 +45,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Database.ItemColumns.TYPE
 
             );
-
-
-    public DatabaseHelper(@Nullable Context context) {
-        super(context, Database.DATABASE_NAME, null, Database.DATABASE_VERSION);
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_FAVOURITE_QUERY);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + Database.TABLE_NAME);
-        onCreate(db);
-    }
 }

@@ -30,16 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         bottom_nav = findViewById(R.id.bottom_navbar);
         bottom_nav.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.movieMenu)
-            {
+            if (item.getItemId() == R.id.movieMenu) {
                 displayMovieFragment(Fm);
             }
-            else if (item.getItemId() == R.id.tvShowMenu)
-            {
+            else if (item.getItemId() == R.id.tvShowMenu) {
                 displayTvFragment(Fm);
             }
-            else if (item.getItemId() == R.id.favoriteMenu)
-            {
+            else if (item.getItemId() == R.id.favoriteMenu) {
                 displayFavoriteFragment(Fm);
             }
             return true;

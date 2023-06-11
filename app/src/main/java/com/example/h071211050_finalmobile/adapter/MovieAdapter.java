@@ -22,6 +22,20 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     private List<MovieModel> dataMovie;
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView Poster;
+        TextView title_movie, release_year;
+        CardView item_grid_cv;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            Poster = itemView.findViewById(R.id.poster);
+            title_movie = itemView.findViewById(R.id.title2);
+            release_year = itemView.findViewById(R.id.release_year2);
+            item_grid_cv = itemView.findViewById(R.id.item_grid_cv);
+        }
+    }
+
     public MovieAdapter(List<MovieModel> dataMovie) {
         this.dataMovie = dataMovie;
     }
@@ -69,20 +83,5 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     @Override
     public int getItemCount() {
         return dataMovie.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView Poster;
-        TextView title_movie, release_year;
-        CardView item_grid_cv;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            Poster = itemView.findViewById(R.id.poster);
-            title_movie = itemView.findViewById(R.id.title2);
-            release_year = itemView.findViewById(R.id.release_year2);
-            item_grid_cv = itemView.findViewById(R.id.item_grid_cv);
-        }
-
     }
 }

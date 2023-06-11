@@ -17,14 +17,16 @@ public class FavoriteHelper {
         databaseHelper = new DatabaseHelper(context);
     }
 
-    public static FavoriteHelper getInstance(Context context) {
-        if (INSTANCE == null) {
-            synchronized (SQLiteOpenHelper.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new FavoriteHelper(context);
-                }
-            }
-        }return INSTANCE;
+    public int getFavorite(String id) {
+        return database.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + Database.ItemColumns._ID + " = " + id, null).getCount();
+    }
+
+    public long insertData(ContentValues contentValues) {
+        return database.insert(TABLE_NAME, null, contentValues);
+    }
+
+    public int deleteData(String id) {
+        return database.delete(TABLE_NAME, Database.ItemColumns._ID + " = " + id, null);
     }
 
     public void open() throws SQLException {
@@ -38,6 +40,16 @@ public class FavoriteHelper {
         }
     }
 
+    public static FavoriteHelper getInstance(Context context) {
+        if (INSTANCE == null) {
+            synchronized (SQLiteOpenHelper.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new FavoriteHelper(context);
+                }
+            }
+        }return INSTANCE;
+    }
+
     public Cursor queryShowAll() {
         return database.query(
                 Database.TABLE_NAME,
@@ -48,17 +60,5 @@ public class FavoriteHelper {
                 null,
                 Database.ItemColumns._ID + " ASC"
         );
-    }
-
-    public int getFavorite(String id) {
-        return database.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + Database.ItemColumns._ID + " = " + id, null).getCount();
-    }
-
-    public long insertData(ContentValues contentValues) {
-        return database.insert(TABLE_NAME, null, contentValues);
-    }
-
-    public int deleteData(String id) {
-        return database.delete(TABLE_NAME, Database.ItemColumns._ID + " = " + id, null);
     }
 }
