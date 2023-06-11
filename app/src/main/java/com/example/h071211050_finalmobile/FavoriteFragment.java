@@ -14,6 +14,16 @@ import com.example.h071211050_finalmobile.R;
 
 public class FavoriteFragment extends Fragment {
 
+    private RecyclerView ListFavorite;
+    private TextView Error;
+    private ProgressBar FavoriteProgressbar;
+    private FavoriteAdapter favoriteAdapter;
+    private ArrayList<FavoriteModel> favoriteModel = new ArrayList<>();
+    private ActivityResultLauncher<Intent> result = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                loadAllFavorite();
+            }
+    );
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
