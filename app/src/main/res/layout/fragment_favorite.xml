@@ -6,19 +6,19 @@
     tools:context=".FavoriteFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favoriteList"
+        android:id="@+id/listFavorite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/list_layout_item"/>
     <TextView
-        android:id="@+id/error_message_tv"
+        android:id="@+id/error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:text="Sedang tidak baik-baik saja"
         android:textStyle="bold"
-        android:visibility="gone"
         android:textAlignment="center"
-        android:text="There's something trouble \n try to reload your page"/>
+        android:visibility="gone"/>
     <ProgressBar
         android:id="@+id/fav_progressbar"
         android:layout_width="wrap_content"

@@ -12,7 +12,7 @@
         />
     <item
         android:title="Favorite"
-        android:id="@+id/favouriteMenu"
+        android:id="@+id/favoriteMenu"
         android:icon="@drawable/favorite"
         />
 </menu>
