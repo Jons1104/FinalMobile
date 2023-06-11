@@ -1,4 +1,4 @@
-package com.example.h071211050_finalmobile.sqlite;
+package com.example.h071211050_finalmobile.networking;
 
 import com.example.h071211050_finalmobile.models.FavoriteModel;
 

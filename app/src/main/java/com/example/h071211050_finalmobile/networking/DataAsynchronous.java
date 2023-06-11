@@ -1,4 +1,4 @@
-package com.example.h071211050_finalmobile.sqlite;
+package com.example.h071211050_finalmobile.networking;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -14,11 +14,11 @@ import java.util.concurrent.Executors;
 
 
 public class DataAsynchronous {
-    private final WeakReference<Context> contextWeakReference;
+    private final WeakReference<Context> contextWeak;
     private final WeakReference<DataCallback> weakCallback;
 
     public DataAsynchronous(Context contextWeakReference, DataCallback weakCallback) {
-        this.contextWeakReference = new WeakReference<>(contextWeakReference);
+        this.contextWeak = new WeakReference<>(contextWeakReference);
         this.weakCallback = new WeakReference<>(weakCallback);
     }
 
@@ -26,7 +26,7 @@ public class DataAsynchronous {
         Executor executors = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executors.execute(() -> {
-            Context context = contextWeakReference.get();
+            Context context = contextWeak.get();
             FavoriteHelper favoriteHelper = FavoriteHelper.getInstance(context);
             favoriteHelper.open();
             Cursor cursor = favoriteHelper.queryShowAll();

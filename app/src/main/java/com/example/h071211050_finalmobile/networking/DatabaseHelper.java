@@ -1,4 +1,4 @@
-package com.example.h071211050_finalmobile.sqlite;
+package com.example.h071211050_finalmobile.networking;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

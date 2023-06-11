@@ -1,4 +1,4 @@
-package com.example.h071211050_finalmobile.sqlite;
+package com.example.h071211050_finalmobile.networking;
 
 import android.provider.BaseColumns;
 
@@ -11,7 +11,7 @@ public class Database {
         public static final String DATE = "release_date";
         public static final String OVERVIEW = "overview";
         public static final String POSTER_PATH = "poster_path";
-        public static final String BACKDROP_PATH = "backdrop_path   ";
+        public static final String BACKDROP_PATH = "backdrop_path";
         public static final String VOTE_AVERAGE = "vote_average";
         public static final String TYPE = "type";
 
