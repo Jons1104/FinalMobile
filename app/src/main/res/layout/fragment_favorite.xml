@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Sedang tidak baik-baik saja"
+        android:text="You haven't favorited any film yet"
         android:textStyle="bold"
         android:textAlignment="center"
         android:visibility="gone"/>

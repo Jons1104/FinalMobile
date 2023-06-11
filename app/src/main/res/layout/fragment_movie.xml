@@ -20,7 +20,7 @@
         android:textStyle="bold"
         android:visibility="gone"
         android:textAlignment="center"
-        android:text="Sedang tidak baik-baik saja"/>
+        android:text="Please check your internet connection"/>
     <ProgressBar
         android:id="@+id/movie_progressbar"
         android:layout_width="wrap_content"
