@@ -1,8 +1,7 @@
-package com.example.h071211050_finalmobile.Api;
+package com.example.h071211050_finalmobile.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Headers;
 
 public class ApiConfig {
     public static ApiService getApiService() {;
