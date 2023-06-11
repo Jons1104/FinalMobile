@@ -6,19 +6,19 @@
     tools:context=".TvFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tvList_rv"
+        android:id="@+id/listTv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/grid_item"/>
     <TextView
-        android:id="@+id/error_message_tv"
+        android:id="@+id/error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textStyle="bold"
         android:visibility="gone"
         android:textAlignment="center"
-        android:text="There's something trouble \n try to reload your page"/>
+        android:text="Sedang tidak baik-baik saja"/>
     <ProgressBar
         android:id="@+id/tv_progressbar"
         android:layout_width="wrap_content"
